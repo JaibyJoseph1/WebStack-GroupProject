@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Student Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #a37176;
+            --secondary-color: #a37176;
+            --accent-color:  #a37176;
+            --text-color: #4e434e;
+            --background-color: #FFF0F3;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            background-image: url('https://thumbs.dreamstime.com/b/photo-beautiful-teacher-smiling-front-class-student-background-back-to-school-theme-moment-school-back-to-324687227.jpg');
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+        }
+        h1 {
+            color: var(--text-color);
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        header, footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .navbar {
+            background-color: var(--primary-color);
+        }
+        .navbar-brand {
+            color: white !important;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .nav-link {
+            color: white !important;
+            margin-right: 15px;
+        }
+        .nav-link:hover {
+            color: var(--accent-color) !important;
+        }
+        .navbar-toggler {
+            border: none;
+        }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23FFFFFF' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.4);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+        .form-container:hover {
+            transform: scale(1.02);
+        }
+        .input-box {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid var(--secondary-color);
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        .valid-icon {
+            margin-left: 10px;
+            font-size: 20px;
+        }
+        .valid-icon.correct {
+            color: green;
+        }
+        .valid-icon.wrong {
+            color: red;
+        }
+        .button {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        .button:hover {
+            background-color: var(--text-color);
+        }
+        img {
+            vertical-align: middle;
+        }
+        td {
+            padding: 10px;
+        }
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 20px;
+            }
+            .input-box {
+                padding: 10px;
+            }
+            .button {
+                padding: 12px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="#">Admin Panel</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Adminhome">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="form-container">
+            <h1>Enter Student's Details</h1>
+            <form id="studentForm">
+                <table>
+                    <tr>
+                        <td align="right"><img src="https://img.icons8.com/nolan/64/student-male.png" alt="Student Icon"/></td>
+                        <td>
+                            <input class="input-box" type="text" id="student_name" name="student_name" placeholder="Student Name" required>
+                            <span class="valid-icon" id="nameIcon">❌</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right"><img src="https://img.icons8.com/nolan/64/pencil.png" alt="Student ID Icon"/></td>
+                        <td>
+                            <input class="input-box" type="text" id="emp_id" name="emp_id" placeholder="Student ID" required>
+                            <span class="valid-icon" id="empIdIcon">❌</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right"><img src="https://img.icons8.com/?size=100&id=eYc2kyPS516u&format=png&color=000000" alt="Course Icon"/></td>
+                        <td>
+                            <input class="input-box" type="text" id="subject" name="subject" placeholder="Course " required>
+                            <span class="valid-icon" id="subjectIcon">❌</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right"><img src="https://img.icons8.com/nolan/64/phone.png" alt="Contact Number Icon"/></td>
+                        <td>
+                            <input class="input-box" type="tel" id="contact_no" name="contact_no" placeholder="Contact Number" required>
+                            <span class="valid-icon" id="contactIcon">❌</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <button class="button" type="submit">Submit</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 College Management. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('studentForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            if (!validateForm()) {
+                alert("Please fill in all fields correctly.");
+                return;
+            }
+
+            // Gather form data
+            // const formData = new FormData(this);
+            // console.log(formData);
+
+            let student_name = document.getElementById('student_name');
+            let emp_id = document.getElementById('emp_id');
+            let subject = document.getElementById('subject');
+            let contact_no = document.getElementById('contact_no');
+            const data = {
+                student_name:student_name.value,
+                emp_id:emp_id.value,
+                subject:subject.value,
+                contact_no:contact_no.value
+            };
+            console.log(data);
+            // Submit form data using Fetch API
+            fetch('/addStudent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message);
+                        this.reset();
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    alert("An error occurred: " + error.message);
+                    console.error("Error:", error);
+                });
+
+
+        });
+
+        // Real-time validation for all input fields
+        document.getElementById('student_name').addEventListener('input', validateName);
+        document.getElementById('emp_id').addEventListener('input', validateEmpId);
+        document.getElementById('subject').addEventListener('input', validateSubject);
+        document.getElementById('contact_no').addEventListener('input', validateContact);
+
+        function validateForm() {
+            const isValidName = validateName();
+            const isValidEmpId = validateEmpId();
+            const isValidSubject = validateSubject();
+            const isValidContact = validateContact();
+
+            // Only allow submission if all fields are valid
+            return isValidName && isValidEmpId && isValidSubject && isValidContact;
+        }
+
+        function validateName() {
+            const nameInput = document.getElementById('student_name');
+            const nameIcon = document.getElementById('nameIcon');
+            if (nameInput.value.trim().length > 2) {
+                nameIcon.textContent = '✔️';
+                nameIcon.classList.add('correct');
+                nameIcon.classList.remove('wrong');
+                return true;
+            } else {
+                nameIcon.textContent = '❌';
+                nameIcon.classList.add('wrong');
+                nameIcon.classList.remove('correct');
+                return false;
+            }
+        }
+
+        function validateEmpId() {
+            const empIdInput = document.getElementById('emp_id');
+            const empIdIcon = document.getElementById('empIdIcon');
+            if (/^\d+$/.test(empIdInput.value)) {
+                empIdIcon.textContent = '✔️';
+                empIdIcon.classList.add('correct');
+                empIdIcon.classList.remove('wrong');
+                return true;
+            } else {
+                empIdIcon.textContent = '❌';
+                empIdIcon.classList.add('wrong');
+                empIdIcon.classList.remove('correct');
+                return false;
+            }
+        }
+
+        function validateSubject() {
+            const subjectInput = document.getElementById('subject');
+            const subjectIcon = document.getElementById('subjectIcon');
+            if (subjectInput.value.trim().length > 2) {
+                subjectIcon.textContent = '✔️';
+                subjectIcon.classList.add('correct');
+                subjectIcon.classList.remove('wrong');
+                return true;
+            } else {
+                subjectIcon.textContent = '❌';
+                subjectIcon.classList.add('wrong');
+                subjectIcon.classList.remove('correct');
+                return false;
+            }
+        }
+
+        function validateContact() {
+            const contactInput = document.getElementById('contact_no');
+            const contactIcon = document.getElementById('contactIcon');
+            if (/^\d{10}$/.test(contactInput.value)) {
+                contactIcon.textContent = '✔️';
+                contactIcon.classList.add('correct');
+                contactIcon.classList.remove('wrong');
+                return true;
+            } else {
+                contactIcon.textContent = '❌';
+                contactIcon.classList.add('wrong');
+                contactIcon.classList.remove('correct');
+                return false;
+            }
+        }
+
+    </script>
+</body>
+</html>

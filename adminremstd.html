@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Student</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #a1898c;
+            --secondary-color:#a1898c;
+            --accent-color: #a1898c;
+            --text-color: #000000;
+            --background-color: #FFF0F3;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            background-image: url('https://magecomp.com/blog/wp-content/uploads/2022/07/How-to-Set-Product-Name-as-Default-Alt-Text-to-All-Product-Images-in-Magento-2.png');
+            margin: 0;
+            padding: 20px;
+            background-size: cover;
+            background-position: center;
+        }
+        h1 {
+            color: var(--text-color);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        header, footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 0;
+        }
+        .navbar-brand {
+            color: white !important;
+        }
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+        }
+        .form-container {
+            background-color: rgb(255, 255, 255,0.8);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+        .input-box {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid var(--secondary-color);
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .button {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        .button:hover {
+            background-color: var(--text-color);
+        }
+        .icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        .valid-icon {
+            margin-left: 10px;
+            font-size: 20px;
+        }
+        .valid-icon.correct {
+            color: green;
+        }
+        .valid-icon.wrong {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="#">Admin Pannel</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Adminhome">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="form-container">
+            <h1>Remove Student</h1>
+            <form id="removeStudentForm">
+                <div class="form-group row align-items-center">
+                    <div class="col-md-2 text-md-right">
+                        <img src="https://cdn.iconscout.com/icon/free/png-256/free-student-id-card-4236395-3514196.png" alt="Student Icon" class="icon"/>
+                    </div>
+                    <div class="col-md-10">
+                        <input class="input-box" type="text" id="emp_id" name="emp_id" placeholder="Student ID" required>
+                        <span id="studentIdIcon" class="valid-icon"></span>
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <div class="col-md-12 text-center">
+                        <button class="button" type="submit" name="Submit">Remove</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2024 College Management. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        //const removeStudentForm = document.getElementById('removeStudentForm');
+        document.getElementById('removeStudentForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            if (!validateForm()) {
+                alert("Please fill in Student ID fields correctly.");
+                return;
+            }
+
+            let emp_id = document.getElementById('emp_id');
+            const data = {
+                emp_id:emp_id.value
+            };
+            console.log(data);
+            // Submit form data using Fetch API
+            fetch('/RemStd', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message);
+                        this.reset();
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    alert("An error occurred: " + error.message);
+                    console.error("Error:", error);
+                });
+        });
+
+        // Real-time validation for  input fields
+        document.getElementById('emp_id').addEventListener('input', validateEmpId);
+       
+        function validateForm() {
+            const isValidEmpId = validateEmpId();
+
+            // Only allow submission if all fields are valid
+            return isValidEmpId;
+        }
+
+        function validateEmpId() {
+            const studentIdInput = document.getElementById('emp_id');
+            const studentIdIcon = document.getElementById('studentIdIcon');
+            if (/^\d+$/.test(studentIdInput.value)) {
+                studentIdIcon.textContent = '✔️';
+                studentIdIcon.classList.add('correct');
+                studentIdIcon.classList.remove('wrong');
+                return true;
+            } else {
+                studentIdIcon.textContent = '❌';
+                studentIdIcon.classList.add('wrong');
+                studentIdIcon.classList.remove('correct');
+                return false;
+            }
+        }
+
+        
+    </script>
+</body>
+</html>

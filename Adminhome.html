@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            background-image: url("https://images.unsplash.com/photo-1618044619888-009e412ff12a?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGxvZ2lufGVufDB8fDB8fHww");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: #47535f;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+        }
+
+        #admin-details {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            margin: 20px auto;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            max-width: 800px;
+        }
+
+        #admin-details img {
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        #functions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .function-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+        }
+
+        .funct-item {
+            background-color: #e0dbdb;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 40px; /* Increased padding for a larger button */
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            position: relative; /* For animation effect */
+            overflow: hidden; /* Hide overflow for the inner shadow */
+        }
+
+        .funct-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            background-color: #e8f0fe; /* Light blue on hover */
+        }
+
+        .funct-item i {
+            font-size: 32px; /* Increased icon size */
+            margin-bottom: 10px;
+            color: #0056b3;
+            transition: color 0.3s ease; /* Animation for icon color */
+        }
+
+        .funct-item:hover i {
+            color: #004494; /* Darker blue on hover */
+        }
+
+        a {
+            color: #0056b3;
+            font-size: 20px; /* Slightly larger text */
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="#">Admin Panel</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="mainpg.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="aboutUS.html">About Us</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div id="admin-details" class="container">
+        <img src="https://thumbs.dreamstime.com/z/operator-icon-vector-isolated-white-background-operator-sign-operator-icon-vector-isolated-white-background-operator-134061068.jpg" alt="Admin Image" width="100">
+        <div>
+            <h3 id="adminName"></h3>
+            <h4 id="adminDept"></h4>
+            <h4 id="adminID"></h4>
+        </div>
+    </div>
+
+    <div id="functions" class="container">
+        <div class="function-row">
+            <div class="funct-item" role="button" aria-label="Add Teacher">
+                <a href="/AdminAddTeacher">
+                    <i class="fas fa-user-plus"></i>
+                    <br>Add Teacher
+                </a>
+            </div>
+            <div class="funct-item" role="button" aria-label="Remove Teacher">
+                <a href="/RemTeacher">
+                    <i class="fas fa-user-times"></i>
+                    <br>Remove Teacher
+                </a>
+            </div>
+        </div>
+        <div class="function-row">
+            <div class="funct-item" role="button" aria-label="Add Student">
+                <a href="/addStudent">
+                    <i class="fas fa-user-graduate"></i>
+                    <br>Add Student
+                </a>
+            </div>
+            <div class="funct-item" role="button" aria-label="Remove Student">
+                <a href="/RemStd">
+                    <i class="fas fa-user-minus"></i>
+                    <br>Remove Student
+                </a>
+            </div>
+        </div>
+        <div class="function-row">
+            <div class="funct-item" role="button" aria-label="View Students">
+                <a href="/viewstd">
+                    <i class="fas fa-eye"></i>
+                    <br>View Students
+                </a>
+            </div>
+            <div class="funct-item" role="button" aria-label="View Teachers">
+                <a href="/viewteach">
+                    <i class="fas fa-eye"></i>
+                    <br>View Teachers
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Function to retrieve query parameters from the URL
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                name: params.get('name') || localStorage.getItem('name') || 'Not Available',
+        admin_id: params.get('admin_id') || localStorage.getItem('admin_id') || 'Not Available',
+        department: params.get('department') || localStorage.getItem('department') || 'Not Available'
+            };
+        }
+
+        // Extract the query parameters
+        const { name, admin_id, department } = getQueryParams();
+        
+        document.getElementById('adminName').innerText = `Name:  ${name}`;
+        document.getElementById('adminID').innerText =`Department: ${department}`;
+        document.getElementById('adminDept').innerText =`Admin ID:  ${admin_id}`;
+        localStorage.setItem('name', name);
+        localStorage.setItem('admin_id', admin_id);
+        localStorage.setItem('department', department);
+
+    </script>
+
+
+</body>
+</html>

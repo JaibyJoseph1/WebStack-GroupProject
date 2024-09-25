@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background: url('https://i.pinimg.com/originals/01/32/31/01323190cd6933de96287a5804fd636a.gif') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .navbar {
+            background-color: rgba(153, 79, 79, 0.7) !important;
+        }
+        .navbar-brand {
+            font-size: 1.5rem;
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ddd !important;
+        }
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.6); /* Light and airy background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            width: 500px;
+            text-align: center;
+            
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #333; /* Dark text color for readability */
+        }
+        .login-container h1 {
+            margin-bottom: 15px;
+            color: #444; /* Darker text color for better contrast */
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 95%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #f5f5f5; /* Light grey background for input fields */
+            color: #333; /* Dark text color for readability */
+        }
+        .login-container button {
+            width: 100%;
+            padding: 15px;
+            background-color: #758697; /* Bootstrap primary color */
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: background-color 0.3s ease;
+        }
+        .login-container button:hover {
+            background-color: #657885; /* Darker shade on hover */
+        }
+        .login-container .forgot-password {
+            margin-top: 10px;
+            display: block;
+            color: #758697; /* Match button color */
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .login-container .forgot-password:hover {
+            color: #758697; /* Darker shade on hover */
+            text-decoration: underline;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(153, 79, 79, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 2px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="#">Admin Panel</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/aboutUS">About Us</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="login-container">
+            <h1>Admin Login</h1>
+            <!-- Login form with action pointing to the Express backend -->
+            <form id="myForm">
+                <input type="text" id="admin_id" name="admin_id" placeholder="Admin ID" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+               
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Admin Panel. All rights reserved.</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        let myForm = document.getElementById('myForm');
+        let admin_id = document.getElementById('admin_id');
+        let password = document.getElementById('password');
+
+        myForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // console.log('Submitted');
+            // alert('Form submitted successfully!');
+            //collect the input data
+            const data = {
+                admin_id: admin_id.value,
+                password: password.value
+            };
+            console.log(data);
+            fetch('/adminlog', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        // Redirect to login page on success
+                        window.location.href = result.redirectUrl;
+                        //alert('Logged In');
+                    } else {
+                        alert(result.message || 'Login failed');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+    </script>
+</body>
+</html>

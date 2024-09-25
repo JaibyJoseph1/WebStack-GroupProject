@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Elevate Academy</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            background-image: url('https://img.freepik.com/premium-photo/abstract-collage-education-intelligence-wallpaper_468322-1437.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .navbar {
+            background-color: rgba(168, 100, 100, 0.7);
+        }
+
+        .navbar-brand, .nav-link {
+            color: rgba(22, 3, 3, 0.7) !important;
+        }
+
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .main-content article {
+            flex: 1 1 300px;
+            margin: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .main-content article:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: 2px solid #0056b3;
+        }
+
+        button:hover {
+            background-color: #7c7d7e;
+            color: #fff;
+        }
+
+        .hero {
+            background: url('https://img95.lovepik.com/photo/40105/1085.gif_wh860.gif') no-repeat center center;
+            background-size: cover;
+            color: #fff;
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero h1, .hero p {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            font-weight: bold;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            .hero h1 {
+                font-size: 2em;
+            }
+            .hero p {
+                font-size: 1.2em;
+            }
+        }
+
+        .team-container {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        footer {
+            background-color: rgba(168, 100, 100, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .location {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-qr {
+            background-color: #69819a90;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-qr:hover {
+            background-color: #6e7f93;
+        }
+
+        .card {
+            margin-bottom: 20px; /* Ensure there is space below cards */
+            background-color: #abbfd6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="#">About Us Panel</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ContactUs.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero text-center">
+            <div class="container">
+                <h1>About Elevate Academy</h1>
+                <p>Welcome to Elevate Academy, where education meets excellence.</p>
+            </div>
+        </section>
+
+        <section class="main-content">
+            <article>
+                <h2>Our Mission</h2>
+                <p>To provide high-quality education that empowers students to reach their full potential and make a positive impact on society.</p>
+            </article>
+            <article>
+                <h2>Our Vision</h2>
+                <p>To be a leading educational institution known for innovation, excellence, and inclusiveness.</p>
+            </article>
+            <article>
+                <h2>Our Values</h2>
+                <p>Integrity, Innovation, Inclusiveness, and Excellence in all our endeavors.</p>
+            </article>
+            <article>
+                <h2>Our History</h2>
+                <p>Founded in 1990, AcademiaHub has grown from a small local college to a globally recognized institution.</p>
+            </article>
+        </section>
+
+        <section class="gallery">
+            <img src="https://www.collegebatch.com/static/clg-gallery/christ-university-bangalore-302727.webp" alt="Campus Image 1">
+            <img src="https://images.shiksha.com/mediadata/images/1580449195phpC0Bg6J.png" alt="Campus Image 2">
+            <img src="https://www.sju.edu.in/images/actv-mmg_3.jpg" alt="Campus Image 3">
+            <img src="https://educationquest.org/wp-content/uploads/2020/03/college-campus-856x556.png" alt="Campus Image 4">
+        </section>
+
+        <aside>
+            <div class="container team-container my-5">
+                <h2>Meet Our Team</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="https://media.bizj.us/view/img/11503902/skatesspenser101119tj-5*1200xx6951-3910-0-365.jpg" class="card-img-top" alt="Team Member 1">
+                            <div class="card-body">
+                                <h5 class="card-title">SIMSON K O</h5>
+                                <p class="card-text">Professor</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="https://media.bizj.us/view/img/11927754/doug-8555*900xx4805-2716-0-916.jpg" class="card-img-top" alt="Team Member 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Alexander Maxwell</h5>
+                                <p class="card-text">Associate Professor</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/itLawwiHeD3Y/v1/-1x-1.jpg" class="card-img-top" alt="Team Member 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Christopher Hughes</h5>
+                                <p class="card-text">Assistant Professor</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <section class="location text-center my-5">
+            <h2>Our Location</h2>
+            <p>Find us at:</p>
+            <p>Begur Road, behind Canara Bank, Nanjundaiah Layout, Srinivasa Reddy Layout, Begur, Bengaluru, Karnataka</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=12.9182,77.6194" class="btn-qr" target="_blank">View on Google Maps</a>
+            <br><br>
+
+            <a href="map.html" class="btn-qr">Location</a>
+        </section>
+
+        <div id="map"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Elevate Academy. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([12.9182, 77.6194], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19
+        }).addTo(map);
+        L.marker([12.9182, 77.6194]).addTo(map)
+            .bindPopup('Elevate Academy Location')
+            .openPopup();
+    </script>
+</body>
+</html>
